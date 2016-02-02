@@ -1,0 +1,62 @@
+# Nginx配置记录
+
+## 安装准备
+
+### 下载源码
+
+官方下载地址：http://nginx.org/en/download.html
+
+本次安装版本为1.6.3，下载tar包scp到服务器/usr/local/src下并解压，删除tar包
+
+## 安装编译
+
+编译安装nginx需要其它的库做支持，安装所需库如下：
+
+```
+yum install pcre pcre-devel zlib zlib-devel ssl make gcc gcc-c++
+```
+
+### 编译参数说明
+
+--prefix: nginx安装路径
+
+--conf-path: nginx.conf配置文件路径
+
+--with-pcre: pcre路径，使用yum安装可不指定
+
+--with-zlib: zlib路径
+
+--hth-http_gzip_static_module: 启用gzip压缩
+
+--with-http_stub_status_module: 监控当前状态
+
+--error-log-path: 错误日志位置
+--http-log-path: 访问日志位置
+--pid-path: pid文件位置
+
+
+### 执行编译安装
+
+
+```
+./configure  --prefix=/opt/nginx  --conf-path=/etc/nginx/nginx.conf  --with-pcre    --with-http_gzip_static_module --with-http_stub_status_module --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx/nginx.pid --lock-path=/var/lock/nginx.lock --http-log-path=/var/log/nginx/access.log --http-client-body-temp-path=/var/tmp/nginx/client/ --http-proxy-temp-path=/var/tmp/nginx/proxy/ --http-fastcgi-temp-path=/var/tmp/nginx/fcgi/
+
+make&make install
+```
+
+## 详细配置
+
+结合ghost博客系统进行详细配置
+
+
+
+
+
+
+
+
+
+
+
+
+
