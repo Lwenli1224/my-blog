@@ -13,7 +13,7 @@
 ### 编译依赖
 
 - webpack：用于预编译js及jsx文件
-- babel-loader：webpack loader，用于编译JSX文件
+- babel-loader：webpack loader，用于编译ES2015语法的javascript
 - babel-preset-react：babel编译预设，用于react
 
 ### 其它插件
