@@ -54,15 +54,21 @@ Software-as-a-Service（软件即服务）
 
 ## Get Started
 
-在OS上我们并不能直接使用Docker而是要通过Docker Machine新建出一个最基本的虚拟机，然后进入该虚机建立docker镜像
+在OS上我们并不能直接使用Docker而是要通过Docker Machine新建出一个最基本的虚拟机，真正的Docker是运行在该linux虚机中，而OS中的Docker仅仅是一个和虚机对话的入口。
 
 使用`docker-machine create`命令新建虚机
 
 ```shell
 docker-machine create --driver virtualbox default
+
+eval $(docker-machine env dev)
 ```
 
-使用`docker-machine ssh`登录虚机
+开启虚机后，即可在本地终端使用docker
+
+```shell
+docker-machine start default
+```
 
 ## 构建镜像
 
@@ -90,7 +96,11 @@ Docker镜像的第一层是引导文件系统，即bootfs当容器启动后，�
 
 #### CMD
 
+设定容器启动时需要执行的命令，可被`docker run`指定运行的命令覆盖。
+
 #### ENTRYPOINT
+
+同样为容器启动时执行的命令，与`CMD`命令不同的是，它不能被`docker run`指定的命令所覆盖，而是会与外部所指定的命令形成新的命令。可以`CMD`命令构造出默认命令参数。
 
 #### WORKDIR
 
@@ -100,15 +110,43 @@ Docker镜像的第一层是引导文件系统，即bootfs当容器启动后，�
 
 #### VOLUME
 
+向基于镜像创建的容器添加卷。卷用于存放代码、数据库，而不是将这些内容提交到镜像之中。
+
 #### ADD
+
+将文件提交到镜像中，文件必须处于构建目录下，也就是说必须与*Dockerfile*文件处于同一文件夹下。
+
+```shell
+ADD ./nginx.conf /etc/nginx/nginx.conf
+```
 
 #### EXPOSE
 
-####
+设置该容器对外暴露的端口
+
+
+### 构建镜像
+
 
 ## 运行容器
 
-### 端口
+### 卷
+
+卷在搭建docker工作栈中的地位非常重要，我们的代码和数据库文件一般都是放在卷中，以挂载的方式供容器使用。因为，docker容器的特性，如果该容器因为某些原因被销毁，或者损坏无法进入，就会导致该容器保存的所有磁盘文件丢失，所以我们一定要把数据保存在本地宿主机的数据盘上。这样，即使docker容器销毁，它所生成或修改的数据仍然存在，我们只需要重新启动一个相同服务的容器，将数据所在文件夹挂载至其上，即可以继续提供服务。
+
+可以通过以下两种方式使用docker的卷功能
+
+- 在
+
+### 容器
+
+### 网络
+
+## 进阶使用
+
+### 备份
+
+
 
 
 

@@ -13,12 +13,33 @@
 ### 编译依赖
 
 - webpack：用于预编译js及jsx文件
+- babel-core：babel核心库
 - babel-loader：webpack loader，用于编译ES2015语法的javascript
 - babel-preset-react：babel编译预设，用于react
+- es2015
+- babel-preset-stage-0
+- babel-preset-stage-1
+- babel-plugin-transform-es2015-arrow-functions
 
 ### 其它插件
 
 - webpack-dev-server：用于快速构建webpack文件，模拟真实环境
+- style-loader
+- css-loader
+
+### 安装依赖
+
+
+```bash
+# 安装React依赖
+npm install --save react react-dom
+
+# 安装编译依赖
+npm install --save-dev webpack babel-core babel-loader babel-preset-react
+
+# 安装webpack loader
+npm install --save-dev style-loader css-loader less-loader
+```
 
 ## Hello World
 
@@ -163,7 +184,7 @@ ReactDom.render(
 
 组件就是有限状态机。在React的编程思想里，UI的变化归根结底是由于组件自身的状态变化，并且React会通过一些算法让我们的DOM更新效率更高。
 
-总的来说，React的组件渲染有以下四个重要的环节：
+总的来说，React的组件渲染有以下三个重要的环节：
 
 - 初次渲染
 - 更新
