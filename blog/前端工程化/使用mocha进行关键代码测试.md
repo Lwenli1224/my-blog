@@ -71,10 +71,10 @@ describe('Array', function() {
 ```shell
 mocha
 ```
-默认情况下，mocha会在运行命令的目录下寻找`./test/*.js`或`./test/*.coffee`进行执行，如果存在多级目录，请使用[glob pattern](https://github.com/isaacs/node-glob)方式来匹配文件：
+默认情况下，mocha会在运行命令的目录下寻找`./test/*.js`或`./test/*.coffee`进行执行，如果存在多级目录，请使用`--recursive`参数：
 
 ```shell
-mocha ./test/**/*.js
+mocha --recursive ./test/ 
 ```
 
 如果为依赖安装，则需要借助[npm script](https://docs.npmjs.com/misc/scripts)来执行mocha命令，在项目中`package.json`中加入以下片段
@@ -93,7 +93,7 @@ npm test
 Mocha提供了对Babel的良好支持，如果测试脚本的后缀仅为`.js`，通过`--require`参数即可运行符合ES2015的代码。当然，需要执行`npm install --save-dev babel-register`安装babel支持。
 
 ```shell
-mocha --require babel-register ./test/**/*.js
+mocha --require babel-register --recursive ./test
 ```
 
 ### 使用其它编译器
