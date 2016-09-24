@@ -88,5 +88,20 @@ mocha ./test/**/*.js
 npm test
 ```
 
+### ES2015
+
+Mocha提供了对Babel的良好支持，如果测试脚本的后缀仅为`.js`，通过`--require`参数即可运行符合ES2015的代码。当然，需要执行`npm install --save-dev babel-register`安装babel支持。
+
+```shell
+mocha --require babel-register ./test/**/*.js
+```
+
+### 使用其它编译器
+
+现在比较注重前沿技术的前端团队，开始使用ES2015或ts等语法进行开发了。通过Mocha所提供的指定compiler功能，我们可以使用第三方的编译器来运行测试脚本。
+
+
+
+
 
 
