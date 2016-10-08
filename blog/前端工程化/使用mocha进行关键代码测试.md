@@ -100,6 +100,12 @@ mocha --require babel-register --recursive ./test
 
 现在比较注重前沿技术的前端团队，开始使用ES2015或ts等语法进行开发了。通过Mocha所提供的指定compiler功能，我们可以使用第三方的编译器来运行测试脚本。
 
+```shell
+mocha --compilers js:babel-core/register --recursive ./test
+```
+
+## 高级使用
+
 
 
 

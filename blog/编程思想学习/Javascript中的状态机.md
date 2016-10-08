@@ -32,7 +32,6 @@ guardCond(yes)->act->trans->e
 guardCond(no)->evt
 ```
 
-
 ## 状态机实现
 
 笔者在这里使用Nodejs编写，我们需要一个Factory创建状态机，实现代码如下：
@@ -129,7 +128,6 @@ console.log(state.currentState);
 
 这就是一个简单的状态机雏形了，我们可以定义状态，定义状态迁移的条件和规则，通过状态机，我们可以将多变复杂的UI逻辑整理清楚，归类放置。
 
-## 状态机的应用
 
 
 
