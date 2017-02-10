@@ -1,5 +1,7 @@
 # Mysql Dockerfile
 
+
+
 groupadd -r mysql && useradd -r -g mysql mysql
 
 yum update && yum install -y make gcc-c++ cmake wget

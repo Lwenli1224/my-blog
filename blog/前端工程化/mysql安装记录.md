@@ -1,5 +1,12 @@
 # Mysql安装记录
 
+## Docker下安装
+
+```
+docker run --name mysql -v /var/docker-apps/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Passw0rd -d -p 3306:3306 mysql
+
+```
+
 ## 安装准备
 
 ### 下载源码

@@ -20,6 +20,15 @@
 
 ### 
 
+### 搭建webpack
+
+#### 依赖npm
+
+- babel-loader
+- babel-core
+- babel-preset-es2015
+- webpack
+- babel-polyfill
 
 
 

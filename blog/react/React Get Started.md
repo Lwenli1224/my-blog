@@ -248,4 +248,79 @@ ReactDom.render(
 - 共同组件，
 
 
+## React性能优化
+
+### 概念介绍
+
+- Immutable object：函数式编程中概念，暂且叫不可变对象。React elements就是一种不可变对象，一但它被创建，就不可更改它的子节点和属性，React.js官网原文如下，类比非常优美：
+
+> React elements are immutable. Once you create an element, you can't change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
+> With our knowledge so far, the only way to update the UI is to create a new element, and pass it to ReactDOM.render().
+
+- Not Mutating Data：
+
+- PureComponent：React提供的用于“浅比较”的抽象类，对组件的*state*和*props*进行*shallow comparison*，判断是否需要调用*render()*函数
+
+- Reconciliation：
+
+### 核心优化
+
+#### DOM Diff
+
+如果想从一棵树转换成另一棵新树，现在计算机领域中已经有很多成熟的解决方案可以去生成最小的操作步骤。但是他们算法复杂度太高了，需要O(n3)。如将其用于React，重新渲染1000个元素节点，需要1000的3次方次比较，这实在是太昂贵了。
+
+所以React自己实现了一套启发式算法，复杂度只有O(n)，这套算法基于两种假设：
+
+- 两个不同类型的节点，会生成两棵不同树
+- 开发者可以通过节点属性*key*来明确告诉React需要重新渲染
+
+核心算法如下：
+
+#### DOM元素不同类型
+
+当根节点为不同DOM类型时，React会销毁旧DOM树并重新建立新树，并且需要重新渲染的组件会调用*componentWillUnmount()*生命周期函数。
+
+#### 同类型DOM元素
+
+如果两个元素为相同DOM类型，React会比较其属性，保持其真正的DOM结构不变，只更新变化的属性。
+
+#### 同类型组件元素
+
+当一个组件元素更新时，组件实例保持不变，React会更新组件的内部属性，并且调用*componentWillReceiveProps()*和*componentWillUpdate()*方法。
+
+最后，调用*render()*方法，执行DOM Diff算法。
+
+#### 递归子节点
+
+React会遍历一个线性表每个虚拟节点并且生成一个新突变，与是否线性表是否有变化无关。
+
+但对于线性表增加数据对象这一操作上有两种不同的处理方式：
+
+1. 数据对象追加在线性表尾部，React保持原始DOM树不变，在列表DOM尾部直接插入新子DOM节点。
+2. 数据对象追加在线性表头部，React需要重建列表DOM树，会造成性能问题
+
+#### Keys
+
+为了解决递归子节点的问题，React引入了属性*key*。通过将线性表中的每个元素增加唯一*key*值来“告诉”React如何处理列表DOM。这个*key*值通常来源于后台数据的id或者也可以是该数据对象在该线性表中的索引。
+
+#### 权衡
+
+每个动作（来自于用户或网络）按照理论来说都会使React渲染整个App，但通常渲染结果都是相同的。所以我们需要在日常开发不断地调整React的机制来使我们的项目性能更优。
+
+在当前React的实现中，我们可以告诉React一个子树已经从它的兄弟里移动了，但是React无法得知这个子树被移动到了什么位置，基于这个原因，React会重新渲染所有子树。
+
+因为React基于启发式算法，如果一些预定义的假设不成立，这时性能就会下降，例如：
+
+1. 即使最终渲染的效果相同，但是由于组件类型不同，一样会造成重渲染
+2. *key*值必须为稳定的，可预测的和唯一的。
+
+
+
+
+
+
+
+
+
+
 
