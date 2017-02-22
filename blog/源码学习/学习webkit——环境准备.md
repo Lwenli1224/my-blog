@@ -7,3 +7,4 @@
 1. Visual Studio 2015：虽然不玩.net了，但这个大名鼎鼎的IDE还是要装的。用来构建我们的webkit源码。
 2. Cygwin：在windows上模拟类unix环境，这也是构建webkit源码所需要的。(如果你在win7上运行它，需要cygwin1.dll去实现fork函数)
 3. 
+
